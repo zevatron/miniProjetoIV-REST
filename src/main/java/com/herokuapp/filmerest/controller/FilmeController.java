@@ -41,18 +41,18 @@ public class FilmeController {
 			@QueryParam("genero")String genero,
 			@QueryParam("ano")String ano) {
 		
-		List<Filme>filmes = filmeRepository.findByTituloContainingIgnoreCase(titulo);
+		Filme filme = filmeRepository.findByTituloIgnoreCase(titulo);
 		
-		if(filmes != null ) {
+		if(filme != null ) {
 			return Response.status(Response.Status.CONFLICT).entity("JA EXISTE UM FILME COM O TITULO: " + titulo).build();
 		}
 		
-		Filme f = new Filme(titulo, diretor, estudio, genero, ano);
+		filme = new Filme(titulo, diretor, estudio, genero, ano);
 		
-		filmeRepository.save(f);
+		filmeRepository.save(filme);
 		
 		try {
-			return Response.created(new URI("filmes?id=" + f.getId().toString())).build();
+			return Response.created(new URI("filmes?id=" + filme.getId().toString() + "&tipo=" + MediaType.APPLICATION_JSON)).build();
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

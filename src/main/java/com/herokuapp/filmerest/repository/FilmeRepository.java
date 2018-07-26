@@ -10,6 +10,7 @@ import com.herokuapp.filmerest.model.Filme;
 @Repository("filmeRepository")
 public interface FilmeRepository extends JpaRepository<Filme, Long> {
 	
+	Filme findByTituloIgnoreCase(String titulo);
 	List<Filme> findByTituloContainingIgnoreCase(String titulo);
 	List<Filme> findByDiretorContainingIgnoreCase(String diretor);
 	List<Filme> findByGeneroContainingIgnoreCase(String genero);
