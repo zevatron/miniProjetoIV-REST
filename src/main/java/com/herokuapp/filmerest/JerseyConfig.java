@@ -11,6 +11,7 @@ public class JerseyConfig extends ResourceConfig {
 	public JerseyConfig() {
 //		packages("com.herokuapp.filmerest.controller")
 		register(FilmeController.class);
+		register(CorsFilter.class);
 	}
 
 }
