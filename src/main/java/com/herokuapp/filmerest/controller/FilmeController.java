@@ -107,50 +107,71 @@ public class FilmeController {
 	
 	@GET
 	@Path("titulo/{titulo}")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_HTML)
 	public Response encontrarPorTitulo(@PathParam("titulo") String titulo) {
 		
 		List<Filme> filmes = filmeRepository.findByTituloContainingIgnoreCase(titulo);
 		if(filmes != null ) {
-			return Response.ok(filmes, MediaType.APPLICATION_JSON).build();
+			return Response.ok(html(filmes), MediaType.TEXT_HTML).build();
 		}
 		return naoEncontrado;
 	}
 	
 	@GET
 	@Path("diretor/{diretor}")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_HTML)
 	public Response encontrarPorDiretor(@PathParam("diretor") String diretor) {
 		
 		List<Filme> filmes = filmeRepository.findByDiretorContainingIgnoreCase(diretor);
 		if(filmes != null ) {
-			return Response.ok(filmes, MediaType.APPLICATION_JSON).build();
+			return Response.ok(html(filmes), MediaType.TEXT_HTML).build();
 		}
 		return naoEncontrado;
 	}
 	
 	@GET
 	@Path("genero/{genero}")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_HTML)
 	public Response encontrarPorGenero(@PathParam("genero") String genero) {
 		
 		List<Filme> filmes = filmeRepository.findByGeneroContainingIgnoreCase(genero);
 		if(filmes != null ) {
-			return Response.ok(filmes, MediaType.APPLICATION_JSON).build();
+			return Response.ok(html(filmes), MediaType.TEXT_HTML).build();
 		}
 		return naoEncontrado;
 	}
 	
 	@GET
 	@Path("ano/{ano}")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_HTML)
 	public Response encontrarPorAno(@PathParam("ano") String ano) {
 		
 		List<Filme> filmes = filmeRepository.findByAnoContainingIgnoreCase(ano);
 		if(filmes != null ) {
-			return Response.ok(filmes, MediaType.APPLICATION_JSON).build();
+			return Response.ok(html(filmes), MediaType.TEXT_HTML).build();
 		}
 		return naoEncontrado;
+	}
+	
+	private String html(List<Filme> filmes) {
+		String urlRest = "http://localhost:8080/filmes";
+		String html = "";
+		for(Filme filme : filmes) {
+			String str = "<tr>";	
+			str += "<td>" + filme.getTitulo() + "</td>";
+			str += "<td>" + filme.getDiretor() + "</td>";
+			str += "<td>" + filme.getEstudio() + "</td>";
+			str += "<td>" + filme.getGenero() + "</td>";
+			str += "<td>" + filme.getAno() + "</td>";
+			str += "<td>" + "<a href='edit.html?id="+filme.getId()+"'><i class='far fa-edit'></i></a>" + "</td>";
+			str += "<td>" + "<a href='#' onclick='excluir("+filme.getId()+")'><i class='fas fa-trash'></i></a>" + "</td>";
+			str += "<td>" + "<a href='"+urlRest+"?id="+filme.getId()+"&tipo=application/xml' >xml</a>" + "</td>";
+			str += "<td>" + "<a href='"+urlRest+"?id="+filme.getId()+"&tipo=application/json' >json</a>" + "</td>";
+			str += "</tr>";
+			
+			html+= str;
+		}
+		return html;
 	}
 
 }
