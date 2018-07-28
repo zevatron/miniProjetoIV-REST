@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -35,11 +36,11 @@ public class FilmeController {
 	
 	@POST
 	public Response cadastrar(
-			@QueryParam("titulo")String titulo,
-			@QueryParam("diretor")String diretor,
-			@QueryParam("estudio")String estudio,
-			@QueryParam("genero")String genero,
-			@QueryParam("ano")String ano) {
+			@FormParam("titulo")String titulo,
+			@FormParam("diretor")String diretor,
+			@FormParam("estudio")String estudio,
+			@FormParam("genero")String genero,
+			@FormParam("ano")String ano) {
 		
 		Filme filme = filmeRepository.findByTituloIgnoreCase(titulo);
 		
