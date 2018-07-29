@@ -111,7 +111,7 @@ public class FilmeController {
 	public Response encontrarPorTitulo(@PathParam("titulo") String titulo) {
 		
 		List<Filme> filmes = filmeRepository.findByTituloContainingIgnoreCase(titulo);
-		if(filmes != null && !filmes.isEmpty() ) {
+		if(!filmes.isEmpty()) {
 			return Response.ok(html(filmes), MediaType.TEXT_HTML).build();
 		}
 		return naoEncontrado;
@@ -123,7 +123,7 @@ public class FilmeController {
 	public Response encontrarPorDiretor(@PathParam("diretor") String diretor) {
 		
 		List<Filme> filmes = filmeRepository.findByDiretorContainingIgnoreCase(diretor);
-		if(filmes != null && !filmes.isEmpty() ) {
+		if(!filmes.isEmpty()) {
 			return Response.ok(html(filmes), MediaType.TEXT_HTML).build();
 		}
 		return naoEncontrado;
@@ -135,7 +135,7 @@ public class FilmeController {
 	public Response encontrarPorGenero(@PathParam("genero") String genero) {
 		
 		List<Filme> filmes = filmeRepository.findByGeneroContainingIgnoreCase(genero);
-		if(filmes != null && !filmes.isEmpty() ) {
+		if(!filmes.isEmpty()) {
 			return Response.ok(html(filmes), MediaType.TEXT_HTML).build();
 		}
 		return naoEncontrado;
@@ -147,7 +147,7 @@ public class FilmeController {
 	public Response encontrarPorAno(@PathParam("ano") String ano) {
 		
 		List<Filme> filmes = filmeRepository.findByAnoContainingIgnoreCase(ano);
-		if(filmes != null && !filmes.isEmpty() ) {
+		if(!filmes.isEmpty()) {
 			return Response.ok(html(filmes), MediaType.TEXT_HTML).build();
 		}
 		return naoEncontrado;
