@@ -30,7 +30,9 @@ public class FilmeController {
 	@Autowired
 	private FilmeRepository filmeRepository;
 	
-	private Response naoEncontrado = Response.status(Response.Status.NOT_FOUND).entity("RECURSO NAO ENCONTRADO").build();
+	private Response naoEncontrado() {
+		return Response.status(Response.Status.NOT_FOUND).entity("RECURSO NAO ENCONTRADO").build();
+	}
 
 //	private List<Filme> filmes;
 	
@@ -73,7 +75,7 @@ public class FilmeController {
 			return Response.ok(f,MediaType.APPLICATION_JSON).build();
 		}
 		
-		return naoEncontrado;
+		return naoEncontrado();
 	}
 	
 	@DELETE
@@ -85,7 +87,7 @@ public class FilmeController {
 			filmeRepository.delete(f);
 			return Response.ok(f, MediaType.APPLICATION_XML).build();
 		}
-		return naoEncontrado;
+		return naoEncontrado();
 	}
 	
 	@GET
@@ -102,7 +104,7 @@ public class FilmeController {
 		if(filme != null) {
 			return Response.ok(filme,MediaType.valueOf(tipo)).build();			
 		}
-		return naoEncontrado;
+		return naoEncontrado();
 	}
 	
 	@GET
@@ -114,7 +116,7 @@ public class FilmeController {
 		if(!filmes.isEmpty()) {
 			return Response.ok(html(filmes), MediaType.TEXT_HTML).build();
 		}
-		return naoEncontrado;
+		return naoEncontrado();
 	}
 	
 	@GET
@@ -126,7 +128,7 @@ public class FilmeController {
 		if(!filmes.isEmpty()) {
 			return Response.ok(html(filmes), MediaType.TEXT_HTML).build();
 		}
-		return naoEncontrado;
+		return naoEncontrado();
 	}
 	
 	@GET
@@ -138,7 +140,7 @@ public class FilmeController {
 		if(!filmes.isEmpty()) {
 			return Response.ok(html(filmes), MediaType.TEXT_HTML).build();
 		}
-		return naoEncontrado;
+		return naoEncontrado();
 	}
 	
 	@GET
@@ -150,7 +152,7 @@ public class FilmeController {
 		if(!filmes.isEmpty()) {
 			return Response.ok(html(filmes), MediaType.TEXT_HTML).build();
 		}
-		return naoEncontrado;
+		return naoEncontrado();
 	}
 	
 	private String html(List<Filme> filmes) {
