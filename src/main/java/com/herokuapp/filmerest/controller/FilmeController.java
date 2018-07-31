@@ -156,7 +156,7 @@ public class FilmeController {
 	}
 	
 	private String html(List<Filme> filmes) {
-		String urlRest = "http://localhost:8080/filmes";
+		String urlRest = "https://filmerest.herokuapp.com/filmes";
 		String html = "";
 		for(Filme filme : filmes) {
 			String str = "<tr>";	
